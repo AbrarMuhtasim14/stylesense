@@ -1,0 +1,12 @@
+# Install with:
+# pip install -r requirements_amd.txt --index-url https://download.pytorch.org/whl/rocm6.0
+
+torch
+torchvision
+transformers==4.43.0
+vllm
+fastapi==0.115.0
+uvicorn==0.30.0
+pillow==10.3.0
+numpy==1.26.4
+requests==2.32.0
