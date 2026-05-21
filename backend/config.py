@@ -1,8 +1,18 @@
-from pydantic_settings import BaseSettings
 from functools import lru_cache
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    # ✅ This makes backend ignore extra env vars like NEXT_PUBLIC_*, PORT, etc.
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+        # Optional: removes the "model_" protected namespace warnings
+        protected_namespaces=(),
+    )
+
     # Supabase
     supabase_url: str
     supabase_anon_key: str
@@ -25,10 +35,6 @@ class Settings(BaseSettings):
     corrupt_count: int = 25
     products_total: int = 100
     environment: str = "development"
-
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
 
 
 @lru_cache()
